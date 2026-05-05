@@ -1,5 +1,6 @@
 package com.pedroeng.pc_builder_api.controller;
 
+import com.pedroeng.pc_builder_api.dto.PcBuilderResponse;
 import com.pedroeng.pc_builder_api.service.PcBuilderService;
 import com.pedroeng.pc_builder_api.dto.PcBuilderRequest;
 import jakarta.validation.Valid;
@@ -20,9 +21,7 @@ public class PcBuilderController {
     }
 
     @PostMapping
-        public String gerarConfiguracao(@RequestBody @Valid PcBuilderRequest request){
+        public PcBuilderResponse gerarConfiguracao(@RequestBody @Valid PcBuilderRequest request){
             return service.gerarConfiguracao(request);
     }
-
-
 }

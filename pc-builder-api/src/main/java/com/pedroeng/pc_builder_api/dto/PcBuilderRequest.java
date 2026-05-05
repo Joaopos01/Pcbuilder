@@ -7,6 +7,6 @@ import lombok.Data;
 public class PcBuilderRequest {
 
     private String uso;
-    private String nivelOrcamento;
-    private Double valorMedio;
+    private String orcamento;
+    private Double valorMaximo;
 }
