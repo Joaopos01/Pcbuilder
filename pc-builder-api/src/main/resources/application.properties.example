@@ -1,0 +1,17 @@
+# ================================================================
+#  PC Builder API — Configurações
+#  Renomeie este arquivo para application.properties
+#  e preencha os valores antes de rodar o projeto.
+#  NUNCA commite o application.properties com dados reais!
+# ================================================================
+
+# ─── SERVIDOR ────────────────────────────────────────────
+server.port=8080
+
+# ─── GROQ API ────────────────────────────────────────────
+groq.api.key=SUA_CHAVE_AQUI
+groq.api.url=https://api.groq.com/openai/v1/chat/completions
+groq.model=llama-3.1-8b-instant
+
+# ─── SPRING ──────────────────────────────────────────────
+spring.application.name=pc-builder-api
