@@ -1,21 +1,55 @@
 package com.pedroeng.pc_builder_api.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pedroeng.pc_builder_api.dto.PcBuilderRequest;
 import com.pedroeng.pc_builder_api.dto.PcBuilderResponse;
 import org.springframework.stereotype.Service;
 
 @Service
 public class PcBuilderService {
-        public PcBuilderResponse gerarConfiguracao(PcBuilderRequest request){
-            return new PcBuilderResponse(
-                    "Ryzen 5 5600",
-                    "B450M",
-                    "16 GB DDR4",
-                    "RX 6600",
-                    "SSD 1 TB",
-                    "550 W",
-                    "Mid Tower",
-                    3400.0
+
+    private final GroqService groqService;
+
+    public PcBuilderService(GroqService groqService) {
+        this.groqService = groqService;
+    }
+
+    public PcBuilderResponse gerarConfiguracao(PcBuilderRequest request) {
+        try {
+            String prompt = """
+                    Gere uma configuração de computador com base nos dados abaixo.
+                    
+                    Uso: %s
+                    Orçamento: %s
+                    Valor máximo: %s
+                    
+                    Responda APENAS em JSON válido, sem explicações, sem markdown.
+                    
+                    Use exatamente este formato:
+                    
+                    {
+                      "processador": "",
+                      "placaMae": "",
+                      "memoriaRam": "",
+                      "placaVideo": "",
+                      "armazenamento": "",
+                      "fonte": "",
+                      "gabinete": "",
+                      "precoEstimado": 0
+                    }
+                    """.formatted(
+                    request.getUso(),
+                    request.getOrcamento(),
+                    request.getValorMaximo()
             );
+
+            String respostaIa = groqService.gerarResposta(prompt);
+
+            ObjectMapper mapper = new ObjectMapper();
+            return mapper.readValue(respostaIa, PcBuilderResponse.class);
+
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao converter resposta da IA para PcBuilderResponse", e);
         }
+    }
 }
