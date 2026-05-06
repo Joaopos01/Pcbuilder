@@ -167,12 +167,5 @@ Certifique-se de que a classe `CorsConfig.java` está presente no pacote `config
 **Erro `model_decommissioned` na Groq:**
 O modelo `llama3-8b-8192` foi descontinuado. Use `llama-3.1-8b-instant` ou `llama-3.3-70b-versatile` no `application.properties`.
 
----
 
-## 📄 Licença
-
-Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
-
----
-
-Desenvolvido por **Pedro Eng** 🚀
+Desenvolvido por **Pedro Oliveira** 🚀
